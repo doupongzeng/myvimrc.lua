@@ -7,4 +7,6 @@ sudo apt-get update
 sudo apt-get install neovim
 ```
 - config 
+```
 git clone https://github.com/doupongzeng/myvimrc.lua.git ~/.config/nvim
+```
