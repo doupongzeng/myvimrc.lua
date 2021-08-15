@@ -4,24 +4,24 @@ local g = vim.g   -- a table to access global variables
 local opt = vim.opt -- to set options
 
 
-cmd 'packadd paq-nvim'
-local paq = require('paq-nvim').paq
-paq {'savq/paq-nvim', opt=true}
-
+require('packer').startup(function()
 -- lua companion plugins
-paq {'nvim-lua/plenary.nvim'}
-paq {'nvim-lua/popup.nvim'}
-paq {'svermeulen/vimpeccable'} --Map keys
+use {'nvim-lua/plenary.nvim'}
+use {'nvim-lua/popup.nvim'}
+use {'svermeulen/vimpeccable'} --Map keys
 
 -- plugins
-paq {'hrsh7th/nvim-compe'}
-paq {'windwp/nvim-autopairs'}
-paq {'nvim-treesitter/nvim-treesitter'}
-paq {'folke/tokyonight.nvim'}
-paq {'hoob3rt/lualine.nvim'}
-paq {'neovim/nvim-lspconfig'}
-paq {'nvim-telescope/telescope.nvim'}
-paq {'kyazdani42/nvim-web-devicons'}
+use {'hrsh7th/nvim-compe'}
+use {'windwp/nvim-autopairs'}
+use {'nvim-treesitter/nvim-treesitter'}
+use {'folke/tokyonight.nvim'}
+use {'hoob3rt/lualine.nvim'}
+use {'neovim/nvim-lspconfig'}
+use {'nvim-telescope/telescope.nvim'}
+use {'kyazdani42/nvim-web-devicons'}
+use {'winston0410/commented.nvim'}
+end)
+
 
 
 -- colorscheme
@@ -90,9 +90,8 @@ vimp.nnoremap('<leader>fh', function()
 end)
 
 
-
 -- nvim-autopairs
-require('nvim-autopairs').setup{}
+require('nvim-autopairs').setup()
 require('nvim-autopairs.completion.compe').setup({
     map_cr = true,
     map_complete = true,
@@ -204,7 +203,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'ccls' }
+local servers = { 'ccls', 'jsonls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -214,4 +213,12 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- comment toggle
+require('commented').setup {
+	comment_padding = " ", -- padding between starting and ending comment symbols
+	keybindings = {n = "<leader>c", v = "<leader>c", nl = "<leader>cc"}, -- what key to toggle comment, nl is for mapping <leader>c$, just like dd for d
+	prefer_block_comment = false, -- Set it to true to automatically use block comment when multiple lines are selected
+	set_keybindings = true, -- whether or not keybinding is set on setup
+	ex_mode_cmd = "Comment" -- command for commenting in ex-mode, set it null to not set the command initially.
+}
 
