@@ -67,6 +67,20 @@ vimp.nnoremap('<leader>r', function()
   print("Reloaded vimrc!")
 end)
 
+-- Arguments: mode (optional)
+-- :ShowAllMaps i
+vimp.map_command("ShowAllMaps", function(...) 
+  -- Use empty string as prefix to select all
+  vimp.show_maps('', ...)
+end)
+
+-- Arguments: prefix (required), mode (optional)
+-- :ShowMaps <space> n
+vimp.map_command("ShowMaps", function(...) 
+  vimp.show_maps(...)
+end)
+
+
 -- telescope
 local ts = require 'nvim-treesitter.configs'
 ts.setup{
