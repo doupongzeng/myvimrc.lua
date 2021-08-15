@@ -6,6 +6,7 @@ local opt = vim.opt -- to set options
 
 require('packer').startup(function()
 -- lua companion plugins
+use {'wbthomason/packer.nvim'}
 use {'nvim-lua/plenary.nvim'}
 use {'nvim-lua/popup.nvim'}
 use {'svermeulen/vimpeccable'} --Map keys
