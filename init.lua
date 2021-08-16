@@ -34,7 +34,8 @@ opt.hidden = true                   -- Enable background buffers
 opt.ignorecase = true               -- Ignore case
 opt.smartcase = true                -- Do not ignore case with capitals
 opt.joinspaces = false              -- No double spaces with join
-opt.list = false                     -- Show some invisible characters
+opt.list = true                     -- Show some invisible characters
+opt.listchars = 'tab:> ,extends:>,precedes:<,nbsp:.,trail:•'
 opt.number = true                   -- Show line numbers
 opt.relativenumber = true           -- Relative line numbers
 opt.scrolloff = 7                   -- Lines of context
@@ -48,10 +49,16 @@ opt.splitright = true               -- Put new windows right of current
 opt.termguicolors = true            -- True color support
 opt.wrap = false                    -- Disable line wrap
 
+
 -- map keys
 g.mapleader = " " --<leader>
 -- vimp is shorthand for vimpeccable
 local vimp = require('vimp')
+
+-- Use clipboard
+vimp.nnoremap('<leader>y', '"+y')
+vimp.nnoremap('<leader>p', '"+p') -- after line
+-- vimp.nnoremap('<leader>P', '"+P') -- before line
 
 -- r = reload vimrc
 vimp.nnoremap('<leader>r', function()
