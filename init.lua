@@ -21,6 +21,10 @@ use {'neovim/nvim-lspconfig'}
 use {'nvim-telescope/telescope.nvim'}
 use {'kyazdani42/nvim-web-devicons'}
 use {'winston0410/commented.nvim'}
+use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons'
+}
 end)
 
 
@@ -86,6 +90,10 @@ end)
 -- :ShowMaps <space> n
 vimp.map_command("ShowMaps", function(...) 
   vimp.show_maps(...)
+end)
+
+vimp.nnoremap("<C-n>", function() 
+    cmd(":NvimTreeToggle")
 end)
 
 
@@ -221,6 +229,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>fo', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
+  --nnoremap <silent> <F4> :<C-u>CocCommand clangd.switchSourceHeader<CR>
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
