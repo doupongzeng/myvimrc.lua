@@ -21,10 +21,8 @@ use {'neovim/nvim-lspconfig'}
 use {'nvim-telescope/telescope.nvim'}
 use {'kyazdani42/nvim-web-devicons'}
 use {'winston0410/commented.nvim'}
-use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons'
-}
+use {'kyazdani42/nvim-tree.lua'}
+use {'romgrk/barbar.nvim'}
 end)
 
 
