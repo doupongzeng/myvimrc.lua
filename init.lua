@@ -95,6 +95,21 @@ vimp.nnoremap("<C-n>", function()
     cmd(":NvimTreeToggle")
 end)
 
+--barbar.nvim
+vimp.nnoremap({'silent'}, '<leader>1', [[:BufferGoto 1<CR>]])
+vimp.nnoremap({'silent'}, '<leader>2', [[:BufferGoto 2<CR>]])
+vimp.nnoremap({'silent'}, '<leader>3', [[:BufferGoto 3<CR>]])
+vimp.nnoremap({'silent'}, '<leader>4', [[:BufferGoto 4<CR>]])
+vimp.nnoremap({'silent'}, '<leader>5', [[:BufferGoto 5<CR>]])
+vimp.nnoremap({'silent'}, '<leader>6', [[:BufferGoto 6<CR>]])
+vimp.nnoremap({'silent'}, '<leader>7', [[:BufferGoto 7<CR>]])
+vimp.nnoremap({'silent'}, '<leader>8', [[:BufferGoto 8<CR>]])
+vimp.nnoremap({'silent'}, '<leader>9', [[:BufferGoto 9<CR>]])
+vimp.nnoremap({'silent'}, '<leader>0', [[:BufferLast<CR>]])
+
+vimp.nnoremap({'silent'}, '<leader>tc', [[:BufferClose<CR>]])
+vimp.nnoremap({'silent'}, '<leader>ta', [[:BufferCloseAllButCurrent<CR>]])
+
 
 -- telescope
 local ts = require 'nvim-treesitter.configs'
