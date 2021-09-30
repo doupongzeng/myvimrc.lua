@@ -91,6 +91,7 @@ vimp.map_command("ShowMaps", function(...)
   vimp.show_maps(...)
 end)
 
+require'nvim-tree'.setup()
 vimp.nnoremap("<C-n>", [[:NvimTreeToggle<CR>]])
 
 --barbar.nvim
