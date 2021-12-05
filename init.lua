@@ -41,6 +41,10 @@ use {'winston0410/commented.nvim'}
 use {'kyazdani42/nvim-tree.lua'}
 use {'romgrk/barbar.nvim'}
 use {"numtostr/FTerm.nvim"}
+use {"tpope/vim-surround"}
+use {"vim-scripts/ReplaceWithRegister"}
+use {"vim-scripts/argtextobj.vim"}
+use {"tommcdo/vim-exchange"}
 end)
 
 
