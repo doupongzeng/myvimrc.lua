@@ -224,9 +224,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   ]]
 
-  vimp.nnoremap({'silent'}, '<F2>', [[:lua vim.lsp.buf.definition()<CR>]])
+  vimp.nnoremap({'silent'}, 'gd', [[:lua vim.lsp.buf.definition()<CR>]])
   vimp.nnoremap({'silent'}, 'gh', [[:lua vim.lsp.buf.hover()<CR>]])
-  vimp.nnoremap({'silent'}, 'gd', [[:lua vim.lsp.buf.document_symbol()<CR>]])
+  vimp.nnoremap({'silent'}, '<F2>', [[:lua vim.lsp.buf.document_symbol()<CR>]])
   vimp.nnoremap({'silent'}, 'gr', [[:lua vim.lsp.buf.references()<CR>]])
   --buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   --buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -256,7 +256,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'ccls', 'jsonls' }
+local servers = { 'ccls', 'jsonls', 'bashls', 'cmake' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
