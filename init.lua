@@ -1,3 +1,20 @@
+-- Install packer
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+end
+
+vim.api.nvim_exec(
+  [[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost init.lua PackerCompile
+  augroup end
+]],
+  false
+)
+
 local cmd = vim.cmd -- to execute vim commands e.g. cmd('pwd')
 local fn = vim.fn -- to call vim functions e.g. fn.buffer()
 local g = vim.g   -- a table to access global variables
@@ -24,12 +41,13 @@ use {'winston0410/commented.nvim'}
 use {'kyazdani42/nvim-tree.lua'}
 use {'romgrk/barbar.nvim'}
 use {"numtostr/FTerm.nvim"}
+use {"tpope/vim-surround"}
+use {"vim-scripts/ReplaceWithRegister"}
+use {"vim-scripts/argtextobj.vim"}
+use {"tommcdo/vim-exchange"}
 end)
 
 
--- colorscheme
-vim.g.tokyonight_style = "night"
-cmd 'colorscheme tokyonight'
 
 opt.expandtab = true                -- Use spaces instead of tabs
 opt.hidden = true                   -- Enable background buffers
@@ -52,6 +70,9 @@ opt.termguicolors = true            -- True color support
 opt.wrap = false                    -- Disable line wrap
 opt.mouse = 'nv'
 
+-- colorscheme
+vim.g.tokyonight_style = "night"
+cmd 'colorscheme tokyonight'
 
 -- map keys
 g.mapleader = " " --<leader>
@@ -285,3 +306,4 @@ require'FTerm'.setup({
     },
     border = 'single' -- or 'double'
 })
+
