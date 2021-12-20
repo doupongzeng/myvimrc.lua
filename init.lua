@@ -45,6 +45,8 @@ use {"tpope/vim-surround"}
 use {"vim-scripts/ReplaceWithRegister"}
 use {"vim-scripts/argtextobj.vim"}
 use {"tommcdo/vim-exchange"}
+use {"yuezk/vim-js"}
+use {"maxmellon/vim-jsx-pretty"}
 end)
 
 
@@ -223,6 +225,7 @@ require'lualine'.setup {
 
 --LSP
 local nvim_lsp = require('lspconfig')
+local nvim_lsp_configs = require('lspconfig/configs')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -277,14 +280,39 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'ccls', 'jsonls', 'bashls', 'cmake', 'tsserver' }
+local servers = { 'ccls', 'jsonls', 'bashls', 'cmake', 'tsserver', 'ls_emmet' }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
+    if(lsp == 'ls_emmet') then
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
+        nvim_lsp_configs.ls_emmet = {
+            default_config = {
+                cmd = { "ls_emmet", "--stdio" },
+                filetypes = {
+                    "html",
+                    "css",
+                    "javascript",
+                    "typescript",
+                    "typescriptreact",
+                    "javascriptreact",
+                },
+                root_dir = function(fname)
+                    return vim.loop.cwd()
+                end,
+                settings = {},
+            },
+        }
+        nvim_lsp[lsp].setup({
+            capabilities = capabilities
+        })
+    else
+        nvim_lsp[lsp].setup {
+            on_attach = on_attach,
+            flags = {
+                debounce_text_changes = 150,
+            }
+        }
+    end
 end
 
 -- comment toggle
