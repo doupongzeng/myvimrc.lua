@@ -1,4 +1,4 @@
--- Install packer
+--- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -23,13 +23,22 @@ local opt = vim.opt -- to set options
 
 require('packer').startup(function()
 -- lua companion plugins
+-- for completion
+use {'hrsh7th/cmp-nvim-lsp'}
+use {'hrsh7th/cmp-buffer'}
+use {'hrsh7th/cmp-path'}
+use {'hrsh7th/cmp-cmdline'}
+use {'hrsh7th/nvim-cmp'}
+-- for snippet
+use {'hrsh7th/cmp-vsnip'}
+use {'hrsh7th/vim-vsnip'}
+
 use {'wbthomason/packer.nvim'}
 use {'nvim-lua/plenary.nvim'}
 use {'nvim-lua/popup.nvim'}
 use {'svermeulen/vimpeccable'} --Map keys
 
 -- plugins
-use {'hrsh7th/nvim-compe'}
 use {'windwp/nvim-autopairs'}
 use {'nvim-treesitter/nvim-treesitter'}
 use {'folke/tokyonight.nvim'}
@@ -37,7 +46,7 @@ use {'hoob3rt/lualine.nvim'}
 use {'neovim/nvim-lspconfig'}
 use {'nvim-telescope/telescope.nvim'}
 use {'kyazdani42/nvim-web-devicons'}
-use {'winston0410/commented.nvim'}
+use {'tpope/vim-commentary'}
 use {'kyazdani42/nvim-tree.lua'}
 use {'romgrk/barbar.nvim'}
 use {"numtostr/FTerm.nvim"}
@@ -135,6 +144,49 @@ vimp.nnoremap({'silent'}, '<leader>ta', [[:BufferCloseAllButCurrent<CR>]])
 vimp.nnoremap({'silent'}, '<M-t>', [[:lua require("FTerm").toggle()<CR>]])
 vimp.tnoremap({'silent'}, '<M-t>', '<C-\\><C-n><Cmd>lua require("FTerm").toggle()<CR>')
 
+-- setup nvim-cmp
+local cmp = require'cmp'
+
+cmp.setup({
+    snippet = {
+        -- REQUIRED - you must specify a snippet engine
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        end,
+    },
+    mapping = {
+        ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+        ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        ['<C-e>'] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+        }),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' }, -- For vsnip users.
+    }, {
+        { name = 'buffer' },
+    })
+})
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+    sources = {
+        { name = 'buffer' }
+    }
+})
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' }
+    })
+})
+
 -- telescope
 local ts = require 'nvim-treesitter.configs'
 ts.setup{
@@ -157,42 +209,6 @@ require('nvim-autopairs.completion.compe').setup({
     map_complete = true,
     auto_select = false,
 })
-
--- nvim-compe
-vim.o.completeopt = "menuone,noselect"
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
-
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = true;
-    ultisnips = true;
-    luasnip = true;
-  };
-}
 
 -- lualine
 require'lualine'.setup {
@@ -225,7 +241,7 @@ require'lualine'.setup {
 
 --LSP
 local nvim_lsp = require('lspconfig')
-local nvim_lsp_configs = require('lspconfig/configs')
+local nvim_lsp_configs = require 'lspconfig.configs'
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -249,7 +265,9 @@ local on_attach = function(client, bufnr)
   ]]
 
   vimp.nnoremap({'silent'}, 'gd', [[:lua vim.lsp.buf.definition()<CR>]])
+  vimp.nnoremap({'silent'}, 'gD', [[:lua vim.lsp.buf.declaration()<CR>]])
   vimp.nnoremap({'silent'}, 'gh', [[:lua vim.lsp.buf.hover()<CR>]])
+  vimp.nnoremap({'silent'}, 'gk', [[:lua vim.lsp.buf.signature_help()<CR>]])
   vimp.nnoremap({'silent'}, '<F2>', [[:lua vim.lsp.buf.document_symbol()<CR>]])
   vimp.nnoremap({'silent'}, 'gu', [[:lua vim.lsp.buf.references()<CR>]])
   --buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
@@ -283,26 +301,23 @@ end
 local servers = { 'ccls', 'jsonls', 'bashls', 'cmake', 'tsserver', 'ls_emmet' }
 for _, lsp in ipairs(servers) do
     if(lsp == 'ls_emmet') then
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
+       local capabilities = vim.lsp.protocol.make_client_capabilities()
+        -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
         capabilities.textDocument.completion.completionItem.snippetSupport = true
-        nvim_lsp_configs.ls_emmet = {
-            default_config = {
-                cmd = { "ls_emmet", "--stdio" },
-                filetypes = {
-                    "html",
-                    "css",
-                    "javascript",
-                    "typescript",
-                    "typescriptreact",
-                    "javascriptreact",
-                },
-                root_dir = function(fname)
-                    return vim.loop.cwd()
-                end,
-                settings = {},
-            },
-        }
-        nvim_lsp[lsp].setup({
+        if not nvim_lsp_configs.ls_emmet then
+            nvim_lsp_configs.ls_emmet = {
+                default_config = {
+                    cmd = { 'ls_emmet', '--stdio' };
+                    filetypes = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'haml',
+                    'xml', 'xsl', 'pug', 'slim', 'sass', 'stylus', 'less', 'sss'};
+                    root_dir = function(fname)
+                        return vim.loop.cwd()
+                    end;
+                    settings = {};
+                };
+            }
+        end
+        nvim_lsp.ls_emmet.setup({
             capabilities = capabilities
         })
     else
@@ -314,15 +329,6 @@ for _, lsp in ipairs(servers) do
         }
     end
 end
-
--- comment toggle
-require('commented').setup {
-    comment_padding = " ", -- padding between starting and ending comment symbols
-    keybindings = {n = "<leader>c", v = "<leader>c", nl = "<leader>cc"}, -- what key to toggle comment, nl is for mapping <leader>c$, just like dd for d
-    prefer_block_comment = false, -- Set it to true to automatically use block comment when multiple lines are selected
-    set_keybindings = true, -- whether or not keybinding is set on setup
-    ex_mode_cmd = "Comment" -- command for commenting in ex-mode, set it null to not set the command initially.
-}
 
 -- terminal
 require'FTerm'.setup({
