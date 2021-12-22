@@ -91,6 +91,10 @@ g.mapleader = " " --<leader>
 local vimp = require('vimp')
 
 -- Use clipboard
+vimp.nnoremap('ye', '"+ye')
+vimp.nnoremap('yw', '"+yw')
+vimp.nnoremap('yiw', '"+yiw')
+vimp.nnoremap('yaw', '"+yaw')
 vimp.nnoremap('yy', '"+yy')
 vimp.vnoremap('y', '"+y')
 vimp.nnoremap('p', '"+p')
