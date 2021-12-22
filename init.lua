@@ -91,8 +91,14 @@ g.mapleader = " " --<leader>
 local vimp = require('vimp')
 
 -- Use clipboard
-vimp.nnoremap('<leader>y', '"+y')
-vimp.nnoremap('<leader>p', '"+p') -- after line
+vimp.nnoremap('yy', '"+yy')
+vimp.vnoremap('y', '"+y')
+vimp.nnoremap('p', '"+p')
+vimp.vnoremap('p', '"+p')
+vimp.nnoremap('P', '"+P')
+vimp.vnoremap('P', '"+P')
+vimp.nnoremap('dd', '"+dd')
+vimp.vnoremap('d', '"+d')
 -- vimp.nnoremap('<leader>P', '"+P') -- before line
 
 -- r = reload vimrc
