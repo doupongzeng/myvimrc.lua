@@ -214,11 +214,9 @@ vimp.nnoremap('<leader>fh', [[:Telescope help_tags<CR>]])
 
 -- nvim-autopairs
 require('nvim-autopairs').setup()
-require('nvim-autopairs.completion.compe').setup({
-    map_cr = true,
-    map_complete = true,
-    auto_select = false,
-})
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
 -- lualine
 require'lualine'.setup {
