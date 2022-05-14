@@ -4,7 +4,8 @@ packer.startup({
     -- :h base-directories
     -- ~/.local/share/nvim/
     -- :echo stdpath('data')
-    use 'wbthomason/packer.nvim'
+    use('wbthomason/packer.nvim')
+    use('folke/tokyonight.nvim')
   end,
   config = {
     max_jobs = 16,
@@ -22,19 +23,6 @@ packer.startup({
 
 -- :colorscheme Tab键
 -- :echo $VIMRUNTIME
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 -- 每次保存plugins.lua 自动安装插件
 -- pcall lua函数,检查一个函数是否执行成功
