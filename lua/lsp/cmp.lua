@@ -35,6 +35,7 @@ cmp.setup({
 
   -- 快捷键设置
   mapping = require("keybindings").cmp(cmp),
+  formatting = require('lsp.ui').formatting
 })
 
 -- / 查找模式使用 buffer 源

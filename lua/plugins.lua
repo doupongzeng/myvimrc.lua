@@ -34,6 +34,8 @@ packer.startup({
     use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
     -- 常见编程语言代码段
     use("rafamadriz/friendly-snippets")
+    -- ui
+    use("onsails/lspkind-nvim")
   end,
   config = {
     max_jobs = 16,
