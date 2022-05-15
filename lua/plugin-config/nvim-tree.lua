@@ -28,12 +28,12 @@ nvim_tree.setup({
       list = list_keys,
     },
     number = false,
-    relativenumver = false,
+    relativenumber = false,
     signcolumn = 'yes',
   },
   actions = {
     open_file = {
-      resize_windows = true,
+      resize_window = true,
       -- 打开文件时关闭
       quit_on_open = true,
     },
