@@ -15,6 +15,9 @@ treesitter.setup({
     -- 关闭vim的正则高亮
     additional_vim_regex_highlighting = false,
   },
+  indent = {
+    enable = true,
+  },
 })
 
 -- 开启 Folding 代码折叠模块
