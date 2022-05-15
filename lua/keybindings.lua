@@ -21,9 +21,9 @@ map('n', 's', "", opt)
 map('n', 'sv', ':vsp<CR>', opt)
 map('n', 'sh', ':sp<CR>', opt)
 -- 关闭当前
-map('n', 'sc', ':<C-w>c', opt)
+map('n', 'sc', '<C-w>c', opt)
 -- 关闭其它
-map('n', 'so', ':<C-w>o', opt)
+map('n', 'so', '<C-w>o', opt)
 -- Alt + hjkl 窗口之间跳转
 map('n', '<A-h>', '<C-w>h', opt)
 map('n', '<A-j>', '<C-w>j', opt)
