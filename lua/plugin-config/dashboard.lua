@@ -1,6 +1,9 @@
 vim.g.dashboard_default_executive = "telescope"
 vim.g.dashboard_custom_footer = { "https://doupongzeng.github.io" }
 
+-- https://www.nerdfonts.com/cheat-sheet
+-- http://patorjk.com/software/taag/#p=display&f=ANSI Shadow&t=neovim
+-- https://github.com/glepnir/dashboard-nvim/wiki/Ascii-Header-Text
 vim.g.dashboard_custom_section = {
   a = { description = { "  Projects              " }, command = "Telescope projects" },
   b = { description = { "  Recently files        " }, command = "Telescope oldfiles" },
