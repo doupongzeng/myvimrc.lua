@@ -11,7 +11,7 @@ lualine.setup({
     component_separators = { left = "|", right = "|" },
     -- 分段分隔符
     -- https://github.com/ryanoasis/powerline-extra-symbols
-    -- section_separators = { left = " ", right = "" },
+    section_separators = { left = " ", right = "" },
   },
   extensions = { "nvim-tree", "toggleterm" },
   --+-------------------------------------------------+
