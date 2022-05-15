@@ -10,7 +10,11 @@ packer.startup({
     use({ "akinsho/bufferline.nvim", requires = { "kyazdani42/nvim-web-devicons", "moll/vim-bbye" }})
     use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
     use("arkav/lualine-lsp-progress")
+
     use({ 'nvim-telescope/telescope.nvim', requires = { "nvim-lua/plenary.nvim" } })
+    use("ahmedkhalf/project.nvim")
+
+    use("glepnir/dashboard-nvim")
   end,
   config = {
     max_jobs = 16,
