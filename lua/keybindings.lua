@@ -66,3 +66,28 @@ map('n', '<C-k>', '5k', opt)
 -- 在visul模式里粘贴不要复制
 map('v', 'p', '"_dP', opt)
 
+-------------------------------
+--nvim-tree
+-------------------------------
+local pluginKeys = {}
+map('n', '<C-n>', ':NvimTreeToggle<CR>', opt)
+pluginKeys.nvimTreeList = {
+  -- 打开文件
+  { key = {'<CR>', 'o', '<2-LeftMouse>'}, action = 'edit' },
+  -- 分屏打开
+  { key = 'v', action = 'vsplit' },
+  { key = 'h', action = 'split' },
+  -- 显示隐藏文件
+  { key = 'i', action = 'toggle_ignored' },
+  { key = '.', action = 'toggle_dotfiles' },
+  -- 文件操作
+  { key = '<F5>', action = 'refresh' },
+  { key = 'a', action = 'create' },
+  { key = 'd', action = 'remove' },
+  { key = 'r', action = 'rename' },
+  { key = 'x', action = 'cut' },
+  { key = 'c', action = 'copy' },
+  { key = 'p', action = 'paste' },
+  { key = 's', action = 'system_open' },
+}
+return pluginKeys
