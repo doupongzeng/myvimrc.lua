@@ -40,6 +40,7 @@ cmp.setup({
 
 -- / 查找模式使用 buffer 源
 cmp.setup.cmdline("/", {
+  mapping = cmp.mapping.preset.cmdline(require('keybindings').cmdline(cmp)),
   sources = {
     { name = "buffer" },
   },
@@ -47,6 +48,7 @@ cmp.setup.cmdline("/", {
 
 -- : 命令行模式中使用 path 和 cmdline 源.
 cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(require('keybindings').cmdline(cmp)),
   sources = cmp.config.sources({
     { name = "path" },
   }, {

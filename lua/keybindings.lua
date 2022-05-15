@@ -189,5 +189,28 @@ pluginKeys.cmp = function(cmp)
   }
 end
 
+pluginKeys.cmdline = function(cmp)
+  return {
+      ['<C-j>'] = {
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end,
+      },
+      ['<C-k>'] = {
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end,
+      },
+    }
+end
+
 
 return pluginKeys
