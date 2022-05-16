@@ -36,6 +36,8 @@ packer.startup({
     use("rafamadriz/friendly-snippets")
     -- ui
     use("onsails/lspkind-nvim")
+    -- JSON 增强
+    use("b0o/schemastore.nvim")
   end,
   config = {
     max_jobs = 16,
