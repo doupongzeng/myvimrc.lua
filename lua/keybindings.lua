@@ -57,8 +57,8 @@ map('v', 'J', ":move '>+1<CR>gv-gv", opt)
 map('v', 'K', ":move '<-2<CR>gv-gv", opt)
 
 -- 快速移动
-map('n', '<C-j>', '5j', opt)
-map('n', '<C-k>', '5k', opt)
+--map('n', '<C-j>', '5j', opt)
+--map('n', '<C-k>', '5k', opt)
 -- ctrl uppage, ctrl downpage, 默认半屏
 -- map('n', '<C-u>', '9k', opt)
 -- map('n', '<C-d>', '9j', opt)
