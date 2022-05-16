@@ -51,6 +51,15 @@ autocmd("BufWritePost", {
   end,
 })
 
+autocmd("InsertLeave", {
+  group = myAutoGroup,
+  callback = require("utils.im-select").linuxInsertLeave,
+})
+autocmd("InsertEnter", {
+  group = myAutoGroup,
+  callback = require("utils.im-select").linuxInsertEnter,
+})
+
 -- Highlight on yank
 --[[ autocmd("TextYankPost", {
   callback = function()
