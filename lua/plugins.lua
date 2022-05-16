@@ -86,20 +86,5 @@ packer.startup({
   }
 })
 
-
-
 -- :colorscheme Tab键
 -- :echo $VIMRUNTIME
-
--- 每次保存plugins.lua 自动安装插件
--- pcall lua函数,检查一个函数是否执行成功
-pcall(
-  vim.cmd,
-  -- vim脚本
-  [[
-    augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-    augroup end
-  ]]
-)

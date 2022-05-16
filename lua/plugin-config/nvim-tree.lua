@@ -16,7 +16,7 @@ nvim_tree.setup({
   },
   filters = {
     dotfiles = true,
-    custom = {'node_modules'},
+    custom = { 'node_modules' },
   },
   view = {
     width = 40,
@@ -44,8 +44,3 @@ nvim_tree.setup({
     cmd = 'open',
   },
 })
-
--- 自动关闭
-vim.cmd([[
-  autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-]])
