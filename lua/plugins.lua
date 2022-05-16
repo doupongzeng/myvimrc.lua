@@ -40,6 +40,7 @@ packer.startup({
     use("b0o/schemastore.nvim")
     use("windwp/nvim-autopairs")
     use("numToStr/Comment.nvim")
+    use("ur4ltz/surround.nvim")
   end,
   config = {
     max_jobs = 16,
