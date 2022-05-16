@@ -18,6 +18,13 @@ treesitter.setup({
   indent = {
     enable = true,
   },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = require('keybindings').textobj,
+    }
+  }
 })
 
 -- 开启 Folding 代码折叠模块

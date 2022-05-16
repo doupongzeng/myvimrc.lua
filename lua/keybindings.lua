@@ -231,5 +231,12 @@ pluginKeys.comment = {
 map("n", "<C-_>", "gcc", { noremap = false })
 map("v", "<C-_>", "gcc", { noremap = false })
 
+pluginKeys.textobj = {
+  ["aa"] = "@parameter.outer",
+  ["ia"] = "@parameter.inner",
+  ["af"] = "@function.outer",
+  ["if"] = "@function.inner",
+}
+
 
 return pluginKeys
