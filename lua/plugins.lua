@@ -74,6 +74,7 @@ packer.startup({
     use("windwp/nvim-autopairs")
     use("numToStr/Comment.nvim")
     use("ur4ltz/surround.nvim")
+    use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
   end,
   config = {
     max_jobs = 16,
