@@ -11,7 +11,7 @@ null_ls.setup({
   sources = {
     -- Formatting ---------------------
     -- StyLua
-    formatting.stylua,
+    -- formatting.stylua,
     formatting.clang_format,
     -- frontend
     -- formatting.fixjson,
