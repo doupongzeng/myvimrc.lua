@@ -39,6 +39,30 @@ autocmd("TermOpen", {
   callback = vim.lsp.buf.formatting,
 }) ]]
 
+autocmd("FileType", {
+  group = myAutoGroup,
+  pattern = { "cpp", "h", "c", "hpp" },
+  callback = function()
+    vim.o.tabstop = 4
+    vim.bo.tabstop = 4
+    vim.o.softtabstop = 4
+    vim.o.shiftwidth = 4
+    vim.bo.shiftwidth = 4
+  end
+})
+
+autocmd("FileType", {
+  group = myAutoGroup,
+  pattern = { "python", "json", "yaml", "javascript", "typescript", "rust", "go", "cmake", "lua" },
+  callback = function()
+    vim.o.tabstop = 2
+    vim.bo.tabstop = 2
+    vim.o.softtabstop = 2
+    vim.o.shiftwidth = 2
+    vim.bo.shiftwidth = 2
+  end
+})
+
 -- 修改lua/plugins.lua 自动更新插件
 autocmd("BufWritePost", {
   group = myAutoGroup,
