@@ -31,9 +31,14 @@ for name, _ in pairs(servers) do
   if config == nil then
     print(name .. "has no config file")
   else
-    lspconfig[name].setup{config.opts}
+    if config.on_setup then
+      config.on_setup(lspconfig[name])
+    else
+      lspconfig[name].setup{}
+    end
   end
 end
+
 
 
 

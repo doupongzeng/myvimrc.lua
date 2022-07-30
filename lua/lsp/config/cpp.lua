@@ -18,4 +18,12 @@ local opts = {
 }
 
 -- 查看目录等信息
-return opts
+return {
+  on_attach = function (server)
+    server.setup{
+      on_attach = opts.on_attach,
+      flags = opts.flags,
+      capabilities = opts.capabilities,
+    }
+  end
+}

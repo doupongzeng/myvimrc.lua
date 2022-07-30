@@ -14,4 +14,14 @@ local opts = {
     client.server_capabilities.document_range_formatting = false
   end,
 }
-return opts
+return {
+  on_setup = function (server)
+    server.setup{
+      on_attach = opts.on_attach,
+      flags = opts.flags,
+      capabilities = opts.capabilities,
+      settings = opts.settings,
+    }
+  end
+
+}
