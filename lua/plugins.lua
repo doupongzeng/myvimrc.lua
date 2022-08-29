@@ -48,7 +48,7 @@ packer.startup({
 
     use("glepnir/dashboard-nvim")
 
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({ "nvim-treesitter/nvim-treesitter" })
     use('nvim-treesitter/nvim-treesitter-textobjects')
 
     use({ "williamboman/nvim-lsp-installer" })
