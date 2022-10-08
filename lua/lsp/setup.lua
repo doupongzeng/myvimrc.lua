@@ -12,7 +12,8 @@ local servers = {
   cmake = require('lsp.config.cmake'),
   pyright = require('lsp.config.python'),
   jsonls = require('lsp.config.json'),
-  ccls = require('lsp.config.cpp'),
+  -- ccls = require('lsp.config.cpp'),
+  clangd = require('lsp.config.cpp'),
 }
 
 -- 自动安装 Language Servers
