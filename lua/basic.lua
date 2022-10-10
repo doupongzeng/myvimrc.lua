@@ -88,7 +88,7 @@ vim.opt.termguicolors = true
 
 -- 不可见字符显示，把空格用点显示
 vim.o.list = true
-vim.o.listchars = 'space:·'
+vim.o.listchars = 'tab:..,trail:·,extends:>,precedes:<,nbsp:~'
 
 -- 使用增强状态栏后不在需要vim的模式提示
 vim.o.showmode = false
