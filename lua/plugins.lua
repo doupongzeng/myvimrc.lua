@@ -76,6 +76,7 @@ packer.startup({
     use("ur4ltz/surround.nvim")
     use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
     use("folke/which-key.nvim")
+    use("eandrju/cellular-automaton.nvim")
   end,
   config = {
     max_jobs = 16,

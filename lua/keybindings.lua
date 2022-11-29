@@ -238,6 +238,10 @@ pluginKeys.textobj = {
   ["af"] = "@function.outer",
   ["if"] = "@function.inner",
 }
+-------------------------------
+-- cellular-automation
+-------------------------------
+map("n", "<leader>rain", ":CellularAutomaton make_it_rain<CR>", opt)
 
 
 return pluginKeys
