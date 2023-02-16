@@ -46,7 +46,7 @@ packer.startup({
     use({ 'nvim-telescope/telescope.nvim', requires = { "nvim-lua/plenary.nvim" } })
     use("ahmedkhalf/project.nvim")
 
-    use("glepnir/dashboard-nvim")
+    use{"glepnir/dashboard-nvim", requires = {"nvim-tree/nvim-web-devicons"} }
 
     use({ "nvim-treesitter/nvim-treesitter" })
     use('nvim-treesitter/nvim-treesitter-textobjects')
