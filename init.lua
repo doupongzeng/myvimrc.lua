@@ -2,6 +2,7 @@ for _, source in ipairs {
   "yellow.options",
   "yellow.lazy",
   "yellow.autocmds",
+  "yellow.mappings",
 }
 do
   local status_ok, fault = pcall(require, source)

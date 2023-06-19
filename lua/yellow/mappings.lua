@@ -1,7 +1,6 @@
 local utils = require "yellow.utils"
 local get_icon = utils.get_icon
 local is_available = utils.is_available
-local ui = require "yellow.utils.ui"
 
 local maps = { i = {}, n = {}, v = {}, t = {} }
 
@@ -10,7 +9,6 @@ local sections = {
   f = { desc = get_icon("Search", 1, true) .. "Find" },
   p = { desc = get_icon("Package", 1, true) .. "Packages" },
   l = { desc = get_icon("ActiveLSP", 1, true) .. "LSP" },
-  u = { desc = get_icon("Window", 1, true) .. "UI" },
   b = { desc = get_icon("Tab", 1, true) .. "Buffers" },
   bs = { desc = get_icon("Sort", 1, true) .. "Sort Buffers" },
   d = { desc = get_icon("Debugger", 1, true) .. "Debugger" },
@@ -136,15 +134,17 @@ if is_available "alpha-nvim" then
 end
 
 -- Comment
+-- 在neovim里<C-/>键码貌似等价于<C-_>，这里设置为<C-/>，当按下Ctrl+/是没有反映的，设置为<C-_>，按下Ctrl+/就有反映。
+-- 两种方式的设置过程一致，vim.keymap.set()
 if is_available "Comment.nvim" then
-  maps.n["<leader>/"] = {
+  maps.n["<C-_>"] = {
     function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
     desc = "Toggle comment line",
   }
-  maps.v["<leader>/"] = {
+  maps.v["<C-_>"] = {
     "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
     desc = "Toggle comment for selection",
-  }
+  } 
 end
 
 -- GitSigns
@@ -411,28 +411,5 @@ maps.t["<C-j>"] = { "<cmd>wincmd j<cr>", desc = "Terminal down window navigation
 maps.t["<C-k>"] = { "<cmd>wincmd k<cr>", desc = "Terminal up window navigation" }
 maps.t["<C-l>"] = { "<cmd>wincmd l<cr>", desc = "Terminal right window navigation" }
 
-maps.n["<leader>u"] = sections.u
--- Custom menu for modification of the user experience
-if is_available "nvim-autopairs" then maps.n["<leader>ua"] = { ui.toggle_autopairs, desc = "Toggle autopairs" } end
-maps.n["<leader>ub"] = { ui.toggle_background, desc = "Toggle background" }
-if is_available "nvim-cmp" then maps.n["<leader>uc"] = { ui.toggle_cmp, desc = "Toggle autocompletion" } end
-if is_available "nvim-colorizer.lua" then
-  maps.n["<leader>uC"] = { "<cmd>ColorizerToggle<cr>", desc = "Toggle color highlight" }
-end
-maps.n["<leader>ud"] = { ui.toggle_diagnostics, desc = "Toggle diagnostics" }
-maps.n["<leader>ug"] = { ui.toggle_signcolumn, desc = "Toggle signcolumn" }
-maps.n["<leader>ui"] = { ui.set_indent, desc = "Change indent setting" }
-maps.n["<leader>ul"] = { ui.toggle_statusline, desc = "Toggle statusline" }
-maps.n["<leader>uL"] = { ui.toggle_codelens, desc = "Toggle CodeLens" }
-maps.n["<leader>un"] = { ui.change_number, desc = "Change line numbering" }
-maps.n["<leader>uN"] = { ui.toggle_ui_notifications, desc = "Toggle UI notifications" }
-maps.n["<leader>up"] = { ui.toggle_paste, desc = "Toggle paste mode" }
-maps.n["<leader>us"] = { ui.toggle_spell, desc = "Toggle spellcheck" }
-maps.n["<leader>uS"] = { ui.toggle_conceal, desc = "Toggle conceal" }
-maps.n["<leader>ut"] = { ui.toggle_tabline, desc = "Toggle tabline" }
-maps.n["<leader>uu"] = { ui.toggle_url_match, desc = "Toggle URL highlight" }
-maps.n["<leader>uw"] = { ui.toggle_wrap, desc = "Toggle wrap" }
-maps.n["<leader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlight" }
-maps.n["<leader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
 
-utils.set_mappings(astronvim.user_opts("mappings", maps))
+utils.set_mappings(maps)
