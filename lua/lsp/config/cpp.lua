@@ -1,5 +1,7 @@
 local opts = {
   capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  -- 会和null-ls冲突，null-ls默认为"utf-16" https://github.com/neovim/neovim/blob/ff1b0f632a8d3aed0ba861057e7bd8ade4540277/runtime/lua/vim/lsp/util.lua#L1771
+  capabilities.offsetEncoding = { "utf-16" },
   flags = {
     debounce_text_changes = 150,
   },
